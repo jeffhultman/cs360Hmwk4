@@ -5,46 +5,13 @@ public final class Scalene extends Triangle
 {
 private int rotateValue = 0;
   private double side1, side2, side3;
-  // private int[] vertexX = new int[3];
-	// private int[] vertexY = new int[3];
 
-  // public void rotate(double degs)
-  // {
-  //   double transX, transY = 0;
-  //   for (int i = 0; i < 3; i++)
-  //   {
-  //     transX = doubleVertexX[i] - centerX;
-  //     transY = doubleVertexY[i] - centerY;
-  //     doubleVertexX[i] = (transX * Math.cos(Math.toRadians(degs)) - transY * Math.sin(Math.toRadians(degs)));
-  //     doubleVertexY[i] = (transX * Math.sin(Math.toRadians(degs)) + transY * Math.cos(Math.toRadians(degs)));
-  //     doubleVertexX[i] += centerX;
-  //     doubleVertexY[i] += centerY;
-  //   }
-  //
-  //   for (int i = 0; i < 3; i++)
-  //   {
-  //     vertexX[i] = (int) doubleVertexX[i];
-  //     vertexY[i] = (int) doubleVertexY[i];
-  //   }
-  //   polygon = new Polygon(vertexX, vertexY, 3);
-  //
-  // }
 
   public void setVertices()
   {
-    double alpha = acos(((side * side) + (side2 * side2) - (side3 * side3)) / (2 * side * side2));
-    double X = side * cos(alpha);
-    double height = side * sin(alpha);
-    double slope1, slope2, slope3, slope4;
-    slope1 = height / -(side2 - X);
-    slope2 = -1 / slope1;
-    slope3 = height / X;
-    slope4 = -1 / slope3;
-    double altEq1, altEq2; // y cooridnate of orthocenter
-    altEq1 = slope2 * X;
-    altEq2 = slope4 * (X - side2);
-    int x1, x2, x3, y1, y2, y3;
-    double newCenY = slope2 * (X - side2);
+    double alpha = Math.acos(((side * side) + (side2 * side2) - (side3 * side3)) / (2 * side * side2));
+    double X = side * Math.cos(alpha);
+    double height = side * Math.sin(alpha);
 
     doubleVertexX[0] = (int) (centerX - (side2 / 2 - X));
     doubleVertexX[1] = (int) (centerX - (side2 / 2));
@@ -65,17 +32,6 @@ private int rotateValue = 0;
 
     g2.setPaint(Color.BLACK);
     g2.drawOval(centerX - 1, centerY - 1, 2, 2);
-
-    // double newCX = (x1 + x2 + x3) / 3;
-    // double newCY = (y1 + y2 + y3) / 3;
-    // vertexX = {(int) (x1), (int) (x2), (int) (x3)};
-    //int xS[] = {(int) (x1 + newCX), (int) (x2 + newCX), (int) (x3 + newCX)};
-    // vertexY = {y1, y2, y3};
-    // for (int i = 0; i < 3; i++)
-    // {
-    //   xS[i] += newCX;
-    //   yS[i] += newCY;
-    // }
 
     g2.setPaint(color);
 		g2.drawPolygon(vertexX, vertexY, 3);
@@ -195,15 +151,5 @@ private int rotateValue = 0;
 		}
 		return string;
 	}
-//   public static void main(String [] args)
-//   {
-//     Scalene S = new Scalene();
-//     S.write(); System.out.println();
-//     S = new Scalene(8, 5, 12);
-//     S.write(); System.out.println();
-//     S.setSide1(12);
-//     S.setSide2(6);
-//     S.setSide3(14);
-//     S.write(); System.out.println();
-//   }
+
 }
