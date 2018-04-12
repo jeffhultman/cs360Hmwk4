@@ -6,49 +6,49 @@ public final class Rectangle extends Quadrilateral
   private int rotateValue = 0;
   private int side2;
   private double tempSide2;
-  public void resize(double N)
-  {
-    if (tempSide <= 20.0)
-    {
-      tempSide = 20.1;
-    }
-    double dist = Math.sqrt(Math.pow(doubleVertexX[1] - centerX, 2) + Math.pow(doubleVertexY[1] - centerY, 2));
-    dist *= .1 * N;
-    for (int i = 0; i < 4; i++)
-    {
-      if (doubleVertexX[i] > centerX)
-      {
-        doubleVertexX[i] += dist;
-      }
-      else if (doubleVertexX[i] == centerX)
-			{
-
-			}
-      else
-      {
-        doubleVertexX[i] -= dist;
-      }
-      if (doubleVertexY[i] > centerY)
-      {
-        doubleVertexY[i] += dist;
-      }
-      else if (doubleVertexY[i] == centerY)
-			{
-
-			}
-      else
-      {
-        doubleVertexY[i] -= dist;
-      }
-    }
-    for (int i = 0; i < 4; i++)
-    {
-      vertexX[i] = (int) (doubleVertexX[i] + .5);
-      vertexY[i] = (int) (doubleVertexY[i] + .5);
-    }
-    polygon = new Polygon(vertexX, vertexY, 4);
-    //setVertices();
-  }
+  // public void resize(double N)
+  // {
+  //   if (tempSide <= 20.0)
+  //   {
+  //     tempSide = 20.1;
+  //   }
+  //   double dist = Math.sqrt(Math.pow(doubleVertexX[1] - centerX, 2) + Math.pow(doubleVertexY[1] - centerY, 2));
+  //   dist *= .1 * N;
+  //   for (int i = 0; i < 4; i++)
+  //   {
+  //     if (doubleVertexX[i] > centerX)
+  //     {
+  //       doubleVertexX[i] += dist;
+  //     }
+  //     else if (doubleVertexX[i] == centerX)
+	// 		{
+  //
+	// 		}
+  //     else
+  //     {
+  //       doubleVertexX[i] -= dist;
+  //     }
+  //     if (doubleVertexY[i] > centerY)
+  //     {
+  //       doubleVertexY[i] += dist;
+  //     }
+  //     else if (doubleVertexY[i] == centerY)
+	// 		{
+  //
+	// 		}
+  //     else
+  //     {
+  //       doubleVertexY[i] -= dist;
+  //     }
+  //   }
+  //   for (int i = 0; i < 4; i++)
+  //   {
+  //     vertexX[i] = (int) (doubleVertexX[i] + .5);
+  //     vertexY[i] = (int) (doubleVertexY[i] + .5);
+  //   }
+  //   polygon = new Polygon(vertexX, vertexY, 4);
+  //   //setVertices();
+  // }
 
   public void setVertices()
   {

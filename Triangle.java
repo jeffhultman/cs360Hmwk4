@@ -139,10 +139,23 @@ public class Triangle extends Shape
         {
             transX = doubleVertexX[i] - centerX;
             transY = doubleVertexY[i] - centerY;
-            doubleVertexX[i] += doubleVertexX[i] * N/100;
-            doubleVertexY[i] += doubleVertexY[i] * N/100;
+            System.out.println(doubleVertexX[i]);
+
+            if (N > 0)
+            {
+            doubleVertexX[i] = transX * 1.1;
+            doubleVertexY[i] = transY * 1.1;
+            }
+            else
+            {
+              doubleVertexX[i] = transX * .9;
+              doubleVertexY[i] = transY * .9;
+            }
+            System.out.println(doubleVertexX[i]);
             doubleVertexX[i] += centerX;
             doubleVertexY[i] += centerY;
+            System.out.println(doubleVertexX[i]);
+
         }
         for (int i = 0; i < 3; i++)
         {

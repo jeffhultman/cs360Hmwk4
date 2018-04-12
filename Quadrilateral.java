@@ -26,45 +26,36 @@ public class Quadrilateral extends Shape
 
   public void resize(double N)
   {
-    if (tempSide <= 20.0)
-    {
-      tempSide = 20.1;
-    }
-    double dist = Math.sqrt(Math.pow(doubleVertexX[1] - centerX, 2) + Math.pow(doubleVertexY[1] - centerY, 2));
-    dist *= .1 * N;
+    double transX, transY = 0;
     for (int i = 0; i < 4; i++)
     {
-      if (doubleVertexX[i] > centerX)
-      {
-        doubleVertexX[i] += dist;
-      }
-      else if (doubleVertexX[i] == centerX)
-			{
+        transX = doubleVertexX[i] - centerX;
+        transY = doubleVertexY[i] - centerY;
+        System.out.println(doubleVertexX[i]);
 
-			}
-      else
-      {
-        doubleVertexX[i] -= dist;
-      }
-      if (doubleVertexY[i] > centerY)
-      {
-        doubleVertexY[i] += dist;
-      }
-      else if (doubleVertexY[i] == centerY)
-			{
+        if (N > 0)
+        {
+        doubleVertexX[i] = transX * 1.1;
+        doubleVertexY[i] = transY * 1.1;
+        }
+        else
+        {
+          doubleVertexX[i] = transX * .9;
+          doubleVertexY[i] = transY * .9;
+        }
+        System.out.println(doubleVertexX[i]);
+        doubleVertexX[i] += centerX;
+        doubleVertexY[i] += centerY;
+        System.out.println(doubleVertexX[i]);
 
-			}
-      else
-      {
-        doubleVertexY[i] -= dist;
-      }
     }
     for (int i = 0; i < 4; i++)
     {
-      vertexX[i] = (int) (doubleVertexX[i] + .5);
-      vertexY[i] = (int) (doubleVertexY[i] + .5);
+        vertexX[i] = (int) (doubleVertexX[i] + .5);
+        vertexY[i] = (int) (doubleVertexY[i] + .5);
     }
-    polygon = new Polygon(vertexX, vertexY, 4);
+  // }
+    polygon = new Polygon(vertexX, vertexY, 3);
     //setVertices();
   }
 
@@ -74,8 +65,8 @@ public class Quadrilateral extends Shape
 
     for (int i = 0; i < 4; i++)
     {
-      transX = centerX - doubleVertexX[i];
-      transY = centerY - doubleVertexY[i];
+      transX = doubleVertexX[i] - centerX;
+      transY = doubleVertexY[i] - centerY;
       // System.out.println(transX);
       doubleVertexX[i] = (transX * Math.cos(Math.toRadians(degs)) - transY * Math.sin(Math.toRadians(degs)));
       doubleVertexY[i] = (transX * Math.sin(Math.toRadians(degs)) + transY * Math.cos(Math.toRadians(degs)));

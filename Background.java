@@ -141,12 +141,12 @@ KeyListener
 		else if (e.getKeyCode() == 61) // + key
 		{
 			// System.out.println(e.getKeyCode());
-			selected.resize(1);
+			selected.resize(10);
 		}
 		else if (e.getKeyCode() == 45) // - kwy
 		{
 			// System.out.println(e.getKeyCode());
-			selected.resize(-1);
+			selected.resize(-10);
 		}
 		else if (e.getKeyCode() == 76) // L kwy
 		{
