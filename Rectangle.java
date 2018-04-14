@@ -11,6 +11,7 @@ public final class Rectangle extends Quadrilateral
   {
     if (!hasVertices)
     {
+      // If shape was read in from format with side length. Math to calculate
       // System.out.println("Math");
       doubleVertexX[0] = (centerX + (side / 2));
       doubleVertexX[1] = (centerX - (side / 2));
@@ -119,6 +120,7 @@ public final class Rectangle extends Quadrilateral
   }
   public void fromString (String str)
   {
+    // Read string for saved shapes
     String [] parts = str.split (" ");
     try
     {
@@ -152,6 +154,7 @@ public final class Rectangle extends Quadrilateral
   }
   public String toString ()
   {
+    // Create a string to save shapes
     String string = new String ();
     string += centerX + " ";
     string += centerY + " ";

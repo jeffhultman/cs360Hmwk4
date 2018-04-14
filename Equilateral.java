@@ -56,21 +56,12 @@ private int rotateValue = 0;
 	{
 		return "Equilateral";
 	}
-	// public void resize(double N)
-	// {
-	// 	if (tempSide <= 20.0)
-	// 	{
-	// 		tempSide = 20.1;
-	// 	}
-	// 	tempSide += N * tempSide;
-	// 	side = (int) tempSide;
-	// 	//setVertices();
-	// }
+
 	public void setVertices()
 	{
 		if (!hasVertices)
 		{
-
+			// If shape was read in from format with side length. Math to calculate 
 			double height = (side * side) - ((side * side) / 4); // a = sqrt(b^2 - c^2)
 			height = sqrt(height);
 			doubleVertexX[0] = (centerX);
@@ -98,7 +89,6 @@ private int rotateValue = 0;
 	public void paintComponent (Graphics2D g2)
 	{
 
-		//setVertices();
 		g2.setPaint (color);
 		g2.fillPolygon (vertexX, vertexY, 3);
 		g2.drawPolygon (vertexX, vertexY, 3);
@@ -120,6 +110,7 @@ private int rotateValue = 0;
 
 	public void fromString (String str)
 	{
+		// Read string for saved shapes
 		String [] parts = str.split (" ");
 		try
 		{
@@ -150,6 +141,7 @@ private int rotateValue = 0;
 	}
 	public String toString ()
 	{
+		// Create a string to save shapes
 		String string = new String ();
 		string += centerX + " ";
 		string += centerY + " ";

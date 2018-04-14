@@ -51,10 +51,7 @@ KeyListener
 		}
 		currentX = e.getX();
 		currentY = e.getY();
-
-
-
-	}
+}
 	public void mouseMoved(MouseEvent e) {}
 	public void paintComponent (Graphics g)
 	{

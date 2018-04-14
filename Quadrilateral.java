@@ -29,28 +29,32 @@ public class Quadrilateral extends Shape
     double transX, transY = 0;
     for (int i = 0; i < 4; i++)
     {
+        // Translate vertices to origin to perform scale algorithm
         transX = doubleVertexX[i] - centerX;
         transY = doubleVertexY[i] - centerY;
         System.out.println(doubleVertexX[i]);
-
         if (N > 0)
         {
+        // Algorithm to increase shape size
         doubleVertexX[i] = transX * 1.1;
         doubleVertexY[i] = transY * 1.1;
         }
         else
         {
+          // Algorithm to decrease shape size
           doubleVertexX[i] = transX * .9;
           doubleVertexY[i] = transY * .9;
         }
-        System.out.println(doubleVertexX[i]);
+        //System.out.println(doubleVertexX[i]);
+        // Translate back to centerX, centerY
         doubleVertexX[i] += centerX;
         doubleVertexY[i] += centerY;
-        System.out.println(doubleVertexX[i]);
+        //System.out.println(doubleVertexX[i]);
 
     }
     for (int i = 0; i < 4; i++)
     {
+      
         vertexX[i] = (int) (doubleVertexX[i] + .5);
         vertexY[i] = (int) (doubleVertexY[i] + .5);
     }

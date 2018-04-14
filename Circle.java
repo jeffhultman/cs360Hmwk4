@@ -68,6 +68,7 @@ public final class Circle extends Shape
 		g2.setPaint (color);
 		g2.fillOval (centerX-side, centerY-side, 2*side, 2*side);
 		g2.drawOval (centerX-side, centerY-side, 2*side, 2*side);
+		// If shape is selected, outline in white
 		if (this.isSelected)
     {
       g2.setPaint(Color.WHITE);
