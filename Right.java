@@ -36,32 +36,37 @@ public final class Right extends Triangle
 		centerX = X;
 		centerY = Y;
 		color = C;
-		setVertices ();
+		numVertices = 3;
+		//setVertices ();
 	}
 
 	public void setVertices ()
 	{
-		doubleVertexX[0] = doubleVertexY[0] = 0;
-		doubleVertexX[1] = 0; doubleVertexY[1] = -side2;
-		doubleVertexX[2] = side; doubleVertexY[2] = 0;
-		double hyp = sqrt (side * side + side2 * side2);
-		double perim = perimeter ();
-		double inX = 0, inY = 0;
-		if (perim > 0)
+		if (!hasVertices)
 		{
-			inX = ((doubleVertexX[0]* hyp + doubleVertexX[1] * side + doubleVertexX[2] * side2) / perim);
-			inY = ((doubleVertexY[0]* hyp + doubleVertexY[1] * side + doubleVertexY[2] * side2) / perim);
+			doubleVertexX[0] = doubleVertexY[0] = 0;
+			doubleVertexX[1] = 0; doubleVertexY[1] = -side2;
+			doubleVertexX[2] = side; doubleVertexY[2] = 0;
+			double hyp = sqrt (side * side + side2 * side2);
+			double perim = perimeter ();
+			double inX = 0, inY = 0;
+			if (perim > 0)
+			{
+				inX = ((doubleVertexX[0]* hyp + doubleVertexX[1] * side + doubleVertexX[2] * side2) / perim);
+				inY = ((doubleVertexY[0]* hyp + doubleVertexY[1] * side + doubleVertexY[2] * side2) / perim);
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				doubleVertexX[i] += (centerX - inX);
+				doubleVertexY[i] += (centerY - inY);
+			}
 		}
+		hasVertices = false;
 		for (int i = 0; i < 3; i++)
 		{
-			doubleVertexX[i] += (centerX - inX);
-			doubleVertexY[i] += (centerY - inY);
+			vertexX[i] = (int) (doubleVertexX[i] + .5);
+			vertexY[i] = (int) (doubleVertexY[i] + .5);
 		}
-		for (int i = 0; i < 3; i++)
-    {
-      vertexX[i] = (int) (doubleVertexX[i] + .5);
-      vertexY[i] = (int) (doubleVertexY[i] + .5);
-    }
 		polygon = new Polygon (vertexX, vertexY, 3);
 	}
 
@@ -102,81 +107,6 @@ public final class Right extends Triangle
 		return "Right";
 	}
 
-	// public void resize(double N)
-	// {
-	// 	if (tempSide <= 20.0)
-	// 	{
-	// 		tempSide = 20.1;
-	// 	}
-	// 	double dist = Math.sqrt(Math.pow(doubleVertexX[1] - doubleVertexX[0], 2) + Math.pow(doubleVertexY[1] - doubleVertexY[0], 2));
-	// 	double dist1 = Math.sqrt(Math.pow(doubleVertexX[2] - doubleVertexX[1], 2) + Math.pow(doubleVertexY[2] - doubleVertexY[1], 2));
-	// 	double dist2 = Math.sqrt(Math.pow(doubleVertexX[0] - doubleVertexX[2], 2) + Math.pow(doubleVertexY[0] - doubleVertexY[2], 2));
-	// 	dist *= .1 * N;
-	// 	dist1 *= .1 * N;
-	// 	dist2 *= .1 * N;
-  //
-	// 	// Modifying Right Tri vertices
-  //
-	// 	if (doubleVertexX[0] < centerX)
-	// 	{
-	// 		doubleVertexX[0] -= dist;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexX[0] += dist;
-	// 	}
-	// 	if (doubleVertexY[0] < centerY)
-	// 	{
-	// 		doubleVertexY[0] -= dist;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexY[0] += dist;
-	// 	}
-  //
-	// 	if (doubleVertexX[1] < centerX)
-	// 	{
-	// 		doubleVertexX[1] -= dist1;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexX[1] += dist;
-	// 	}
-	// 	if (doubleVertexY[1] < centerY)
-	// 	{
-	// 		doubleVertexY[1] -= dist1;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexY[1] += dist;
-	// 	}
-  //
-	// 	if (doubleVertexX[2] < centerX)
-	// 	{
-	// 		doubleVertexX[2] -= dist2;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexX[2] += dist;
-	// 	}
-	// 	if (doubleVertexY[2] < centerY)
-	// 	{
-	// 		doubleVertexY[2] -= dist2;
-	// 	}
-	// 	else
-	// 	{
-	// 		doubleVertexY[2] += dist;
-	// 	}
-  //
-	// 	for (int i = 0; i < 3; i++)
-	// 	{
-	// 		vertexX[i] = (int) (doubleVertexX[i] + .5);
-	// 		vertexY[i] = (int) (doubleVertexY[i] + .5);
-	// 	}
-	// 	polygon = new Polygon(vertexX, vertexY, 3);
-	// 	//setVertices();
-	// }
-
 	public void fromString (String str)
 	{
 		String [] parts = str.split (" ");
@@ -193,10 +123,11 @@ public final class Right extends Triangle
 			else
 			{
 				color = new Color(Integer.parseInt(parts[2]));
+				numVertices = Integer.parseInt(parts[3]);
 				for (int i = 0; i < 3; i++)
 				{
-					doubleVertexX[i] = Double.parseDouble(parts[3 + (2 * i)]);
-					doubleVertexY[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexX[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexY[i] = Double.parseDouble(parts[5 + (2 * i)]);
 				}
 				hasVertices = true;
 			}
@@ -213,6 +144,7 @@ public final class Right extends Triangle
 		string += centerX + " ";
 		string += centerY + " ";
 		string += color.getRGB() + " ";
+		string += numVertices + " ";
 		for (int i = 0; i < 3; i++)
 		{
 			string += doubleVertexX[i] + " ";

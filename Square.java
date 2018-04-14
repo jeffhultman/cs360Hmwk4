@@ -5,42 +5,6 @@ import java.awt.geom.AffineTransform;
 public final class Square extends Quadrilateral
 {
   private int rotateValue = 0;
-  // public void resize(double N)
-  // {
-  //   if (tempSide <= 20.0)
-  //   {
-  //     tempSide = 20.1;
-  //   }
-  //   double dist = Math.sqrt(Math.pow(doubleVertexX[1] - centerX, 2) + Math.pow(doubleVertexY[1] - centerY, 2));
-  //   dist *= .1 * N;
-  //   for (int i = 0; i < 4; i++)
-  //   {
-  //     if (doubleVertexX[i] > centerX)
-  //     {
-  //       doubleVertexX[i] += dist;
-  //     }
-  //     else
-  //     {
-  //       doubleVertexX[i] -= dist;
-  //     }
-  //     if (doubleVertexY[i] > centerY)
-  //     {
-  //       doubleVertexY[i] += dist;
-  //     }
-  //     else
-  //     {
-  //       doubleVertexY[i] -= dist;
-  //     }
-  //   }
-  //   for (int i = 0; i < 4; i++)
-  //   {
-  //     vertexX[i] = (int) (doubleVertexX[i] + .5);
-  //     vertexY[i] = (int) (doubleVertexY[i] + .5);
-  //   }
-  //   polygon = new Polygon(vertexX, vertexY, 4);
-  //   //setVertices();
-  // }
-
   public void paintComponent (Graphics2D g2)
   {
     g2.setPaint(color);
@@ -154,10 +118,11 @@ public final class Square extends Quadrilateral
       else
       {
         color = new Color(Integer.parseInt(parts[2]));
+        numVertices = Integer.parseInt(parts[3]);
         for (int i = 0; i < 4; i++)
         {
-          doubleVertexX[i] = Double.parseDouble(parts[3 + (2 * i)]);
-          doubleVertexY[i] = Double.parseDouble(parts[4 + (2 * i)]);
+          doubleVertexX[i] = Double.parseDouble(parts[4 + (2 * i)]);
+          doubleVertexY[i] = Double.parseDouble(parts[5 + (2 * i)]);
         }
         hasVertices = true;
         setVertices();

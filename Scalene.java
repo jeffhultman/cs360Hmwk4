@@ -9,6 +9,9 @@ private int rotateValue = 0;
 
   public void setVertices()
   {
+    // System.out.println("setVertices");
+    if (!hasVertices)
+    {
     double alpha = Math.acos(((side * side) + (side2 * side2) - (side3 * side3)) / (2 * side * side2));
     double X = side * Math.cos(alpha);
     double height = side * Math.sin(alpha);
@@ -19,11 +22,13 @@ private int rotateValue = 0;
     doubleVertexY[0] = (int) (centerY - height / 2);
     doubleVertexY[1] = (int) (centerY + height / 2);
     doubleVertexY[2] = (int) (centerY + height / 2);
+    }
     for (int i = 0; i < 3; i++)
     {
       vertexX[i] = (int) (doubleVertexX[i] + .5);
       vertexY[i] = (int) (doubleVertexY[i] + .5);
     }
+    hasVertices = false;
     polygon = new Polygon(vertexX, vertexY, 3);
   }
 
@@ -53,6 +58,7 @@ private int rotateValue = 0;
     centerX = X;
     centerY = Y;
     color = C;
+    numVertices = 3;
   }
 
   public Scalene()
@@ -116,18 +122,20 @@ private int rotateValue = 0;
 			centerY = Integer.parseInt(parts[1]);
 			if (Integer.parseInt(parts[2]) > 0)
 			{
-				side = Integer.parseInt(parts[2]);
-				side2 = Integer.parseInt(parts[3]);
+        side = Integer.parseInt(parts[2]);
+        side2 = Integer.parseInt(parts[3]);
         side3 = Integer.parseInt(parts[4]);
 				color = new Color(Integer.parseInt(parts[5]));
 			}
 			else
 			{
 				color = new Color(Integer.parseInt(parts[2]));
-				for (int i = 0; i < 3; i++)
+				numVertices = Integer.parseInt(parts[3]);
+				for (int i = 0; i < numVertices; i++)
 				{
-					doubleVertexX[i] = Double.parseDouble(parts[3 + (2 * i)]);
-					doubleVertexY[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexX[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexY[i] = Double.parseDouble(parts[5 + (2 * i)]);
+          System.out.println(doubleVertexX[i] + " " + doubleVertexY[i]);
 				}
 				hasVertices = true;
 			}
@@ -144,6 +152,7 @@ private int rotateValue = 0;
 		string += centerX + " ";
 		string += centerY + " ";
 		string += color.getRGB() + " ";
+		string += numVertices + " ";
 		for (int i = 0; i < 3; i++)
 		{
 			string += doubleVertexX[i] + " ";

@@ -21,6 +21,7 @@ private int rotateValue = 0;
 		centerX = X;
 		centerY = Y;
 		color = C;
+		numVertices = 3;
 	}
 
 	public Equilateral (Equilateral E)
@@ -79,12 +80,12 @@ private int rotateValue = 0;
 			doubleVertexY[1] = (centerY + (height / 3));
 			doubleVertexY[2] = (centerY + (height / 3));
 		}
-		vertexX[0] = (int) (doubleVertexX[0]);
-		vertexX[1] = (int) (doubleVertexX[1]);
-		vertexX[2] = (int) (doubleVertexX[2]);
-		vertexY[0] = (int) (doubleVertexY[0]);
-		vertexY[1] = (int) (doubleVertexY[1]);
-		vertexY[2] = (int) (doubleVertexY[2]);
+		vertexX[0] = (int) (doubleVertexX[0] + .5);
+		vertexX[1] = (int) (doubleVertexX[1] + .5);
+		vertexX[2] = (int) (doubleVertexX[2] + .5);
+		vertexY[0] = (int) (doubleVertexY[0] + .5);
+		vertexY[1] = (int) (doubleVertexY[1] + .5);
+		vertexY[2] = (int) (doubleVertexY[2] + .5);
 		tempSide = Math.sqrt(Math.pow(vertexX[1] - vertexX[0], 2) + Math.pow(vertexY[1] - vertexY[0], 2));
     if (hasVertices)
     {
@@ -132,10 +133,11 @@ private int rotateValue = 0;
 			else
 			{
 				color = new Color(Integer.parseInt(parts[2]));
+				numVertices = Integer.parseInt(parts[3]);
 				for (int i = 0; i < 3; i++)
 				{
-					doubleVertexX[i] = Double.parseDouble(parts[3 + (2 * i)]);
-					doubleVertexY[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexX[i] = Double.parseDouble(parts[4 + (2 * i)]);
+					doubleVertexY[i] = Double.parseDouble(parts[5 + (2 * i)]);
 				}
 				hasVertices = true;
 			}
@@ -152,6 +154,7 @@ private int rotateValue = 0;
 		string += centerX + " ";
 		string += centerY + " ";
 		string += color.getRGB() + " ";
+		string += numVertices + " ";
 		for (int i = 0; i < 3; i++)
 		{
 			string += doubleVertexX[i] + " ";

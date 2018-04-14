@@ -14,6 +14,7 @@ public class Shape implements Comparable<Shape>
 	protected int centerX;
 	protected int centerY;
 	protected int side;
+	protected int numVertices;
 	protected Color color;
 	protected boolean isSelected = false;
 	protected boolean hasVertices = false;
@@ -42,13 +43,22 @@ public class Shape implements Comparable<Shape>
 
 	public void fromString (String str)
 	{
+		System.out.println("fromString");
 		String [] parts = str.split (" ");
 		try
 		{
 			centerX = Integer.parseInt(parts[0]);
 			centerY = Integer.parseInt(parts[1]);
-			side = Integer.parseInt(parts[2]);
-			color = new Color(Integer.parseInt(parts[3]));
+			if (Integer.parseInt(parts[2]) > 0)
+			{
+				side = Integer.parseInt(parts[2]);
+				color = new Color(Integer.parseInt(parts[3]));
+			}
+			else
+			{
+				color = new Color(Integer.parseInt(parts[2]));
+				side = Integer.parseInt(parts[3]);
+			}
 		}
 		catch (NumberFormatException e)
 		{
@@ -61,8 +71,8 @@ public class Shape implements Comparable<Shape>
 		String string = new String ();
 		string += centerX + " ";
 		string += centerY + " ";
-		string += side + " ";
 		string += color.getRGB() + " ";
+		string += side + " ";
 		return string;
 	}
 
