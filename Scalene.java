@@ -158,7 +158,15 @@ private int rotateValue = 0;
 			string += doubleVertexX[i] + " ";
 			string += doubleVertexY[i] + " ";
 		}
-		return string;
-	}
+    double tempSide;
+
+    tempSide = Math.sqrt(Math.pow(vertexX[1] - vertexX[0], 2) + Math.pow(vertexY[1] - vertexY[0], 2));
+    System.out.println(tempSide);
+    tempSide = Math.sqrt(Math.pow(vertexX[2] - vertexX[1], 2) + Math.pow(vertexY[2] - vertexY[1], 2));
+    System.out.println(tempSide);
+    tempSide = Math.sqrt(Math.pow(vertexX[0] - vertexX[2], 2) + Math.pow(vertexY[0] - vertexY[2], 2));
+    System.out.println(tempSide);
+    return string;
+  }
 
 }
