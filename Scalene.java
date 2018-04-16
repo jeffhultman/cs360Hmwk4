@@ -13,6 +13,11 @@ private int rotateValue = 0;
     if (!hasVertices)
     {
     double alpha = Math.acos(((side * side) + (side2 * side2) - (side3 * side3)) / (2 * side * side2));
+    // System.out.println(alpha);
+    // System.out.println(side);
+    // System.out.println(side2);
+    // System.out.println(side3);
+
     double X = side * Math.cos(alpha);
     double height = side * Math.sin(alpha);
 
