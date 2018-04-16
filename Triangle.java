@@ -63,7 +63,7 @@ public class Triangle extends Shape
             doubleVertexX[i] += deltaX;
             doubleVertexY[i] += deltaY;
         }
-        polygon = new Polygon(vertexX, vertexY, 3);
+        //polygon = new Polygon(vertexX, vertexY, 3);
         for (int i = 0; i < 3; i++)
         {
             vertexX[i] = (int) (doubleVertexX[i] + .5);
@@ -74,72 +74,13 @@ public class Triangle extends Shape
     }
     public void resize(double N)
     {
-        // if (tempSide <= 20.0)
-        // {
-        //     tempSide = 20.1;
-        // }
-        // dist[0] = Math.sqrt(Math.pow(doubleVertexX[0] - centerX, 2) + Math.pow(doubleVertexY[0] - centerY, 2));
-        //
-        // dist[1] = Math.sqrt(Math.pow(doubleVertexX[1] - centerX, 2) + Math.pow(doubleVertexY[1] - centerY, 2));
-        //
-        // dist[2] = Math.sqrt(Math.pow(doubleVertexX[2] - centerX, 2) + Math.pow(doubleVertexY[2] - centerY, 2));
-        // if (dist[0] < 10.0 && N > 0)
-        // {
-        //   dist[0] += .1;
-        // }
-        // else if (dist[1] < 10.0 && N > 0)
-        // {
-        //   dist[1] += .1;
-        // }
-        // else if (dist[2] < 10.0 && N > 0)
-        // {
-        //   dist[2] += .1;
-        // }
-        // if (dist[0] > 10.0 && dist[1] > 10.0 && dist[2] > 10.0)
-        // {
-        //   dist[0] *= .1 * N;
-        //   dist[1] *= .1 * N;
-        //   dist[2] *= .1 * N;
-        // for (int i = 0; i < 3; i++)
-        // {
-        //     if (doubleVertexX[i] > centerX)
-        //     {
-        //         doubleVertexX[i] += dist[i];
-        //     }
-        //     else if (doubleVertexX[i] == centerX)
-        //     {
-        //
-        //     }
-        //     else
-        //     {
-        //         if (i == 1)
-        //         {
-        //             System.out.println("Here");
-        //             System.out.println(doubleVertexX[i]);
-        //             System.out.println(dist[i]);
-        //
-        //         }
-        //         doubleVertexX[i] -= dist[i];
-        //     }
-        //     if (doubleVertexY[i] > centerY)
-        //     {
-        //         doubleVertexY[i] += dist[i];
-        //     }
-        //     else if (doubleVertexY[i] == centerY)
-        //     {
-        //
-        //     }
-        //     else
-        //     {
-        //         doubleVertexY[i] -= dist[i];
-        //     }
-        // }
+
         double transX, transY = 0;
         for (int i = 0; i < 3; i++)
         {
             transX = doubleVertexX[i] - centerX;
             transY = doubleVertexY[i] - centerY;
-            System.out.println(doubleVertexX[i]);
+            // System.out.println(doubleVertexX[i]);
 
             if (N > 0)
             {
@@ -151,10 +92,10 @@ public class Triangle extends Shape
               doubleVertexX[i] = transX * .9;
               doubleVertexY[i] = transY * .9;
             }
-            System.out.println(doubleVertexX[i]);
+            // System.out.println(doubleVertexX[i]);
             doubleVertexX[i] += centerX;
             doubleVertexY[i] += centerY;
-            System.out.println(doubleVertexX[i]);
+            // System.out.println(doubleVertexX[i]);
 
         }
         for (int i = 0; i < 3; i++)

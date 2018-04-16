@@ -19,7 +19,8 @@ KeyListener
 	private int currentX, currentY;
 	private ArrayList <Shape> S = new ArrayList <Shape> ();
 	private Shape selected = null;
-	private boolean shift, ctrl = false;
+	private boolean ready = true;
+	private boolean shift, alt = false;
 
 	public Background ()
 	{
@@ -43,136 +44,198 @@ KeyListener
 	public void mouseDragged(MouseEvent e)
 	{
 		//System.out.println ("Mouse dragged to " + e.getX() + ", " + e.getY());
-		if (inFrame && selected != null)
+		if ((inFrame && selected != null) && shift)
+		{
+			if (e.getX() > currentX)
+			{
+				selected.resize(1);
+			}
+			else if(e.getX() < currentX)
+			{
+				selected.resize(-1);
+			}
+			else if(e.getY() < currentY)
+			{
+				selected.resize(1);
+			}
+			else if(e.getY() > currentY)
+			{
+				selected.resize(-1);
+			}
+		}
+		if ((inFrame && selected != null) && alt)
+		{
+			if (e.getX() > currentX)
+			{
+				selected.rotate(5);
+			}
+			else if(e.getX() < currentX)
+			{
+				selected.rotate(-5);
+			}
+			else if(e.getY() < currentY)
+			{
+				selected.rotate(5);
+			}
+			else if(e.getY() > currentY)
+			{
+				selected.rotate(-5);
+			}
+		}
+		if ((inFrame && selected != null) && (!shift && !alt))
 		{
 			//System.out.println ("Moving " + selected);
 			selected.move (e.getX() - currentX, e.getY() - currentY);
-			repaint();
+			// repaint();
 		}
 		currentX = e.getX();
 		currentY = e.getY();
-}
-	public void mouseMoved(MouseEvent e) {}
-	public void paintComponent (Graphics g)
-	{
-		super.paintComponent (g);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		for (int i = 0; i < S.size(); i++)
-		{
-			S.get(i).paintComponent (g2);
-		}
-	}
-	public void actionPerformed (ActionEvent e)
-	{
-		if (e.getSource() == saveButton)
-		{
-			ShapeIO shapeIO = new ShapeIO ();
-			shapeIO.writeShapes ("SavedShapes.io", S);
-		}
-	}
-	public void mousePressed (MouseEvent e)
-	{
-		//System.out.println ("Mouse pressed at " + e.getX() + ", " + e.getY());
-		inFrame = true;
-		currentX = e.getX();
-		currentY = e.getY();
-		selected = null;
-		if (e.getButton() == e.BUTTON1) // Left mouse button
-		{
-		//System.out.println ("BUTTON1 pressed at " + e.getX() + ", " + e.getY());
-			for (int i = S.size()-1; selected == null && i >= 0; i--)
-			{
-				if (S.get(i).isIn(currentX, currentY))
-				{
-					selected = S.get(i);
-					S.get(i).isSelected = true;
-					System.out.println ("Selected " + selected);
-				}
-				else
-				{
-					S.get(i).isSelected = false;
-				}
-				repaint();
-			}
-		}
-
-	}
-	public void mouseReleased (MouseEvent e) {}
-	public void mouseEntered (MouseEvent e)
-	{
-		inFrame = true;
-	}
-	public void mouseExited (MouseEvent e)
-	{
-		inFrame = false;
-		selected = null;
-	}
-	public void mouseClicked (MouseEvent e) {}
-
-
-	public void keyPressed(KeyEvent e)
-	{
-		//displayInfo(e, "KEY PRESSED: ");
-		if (e.getKeyCode() == 37) // left key
-		{
-			// System.out.println(e.getKeyCode());
-			selected.move(-5,0);
-		}
-		else if (e.getKeyCode() == 38) // up key
-		{
-			// System.out.println(e.getKeyCode());
-			selected.move(0,-5);
-		}
-		else if (e.getKeyCode() == 39) // right key
-		{
-			// System.out.println(e.getKeyCode());
-			selected.move(5,0);
-		}
-		else if (e.getKeyCode() == 40) // down key
-		{
-			// System.out.println(e.getKeyCode());
-			selected.move(0,5);
-		}
-		else if (e.getKeyCode() == 61) // + key
-		{
-			// System.out.println(e.getKeyCode());
-			selected.resize(1);
-		}
-		else if (e.getKeyCode() == 45) // - kwy
-		{
-			// System.out.println(e.getKeyCode());
-			selected.resize(-1);
-		}
-		else if (e.getKeyCode() == 76) // L kwy
-		{
-			// System.out.println(e.getKeyCode());
-			selected.rotateValue -= 1;
-			selected.rotate(-5);
-			selected.hasVertices = true;
-			// selected.hasVertices = true;
-		}
-		else if (e.getKeyCode() == 82) // R kwy
-		{
-			// System.out.println(e.getKeyCode());
-			selected.rotateValue += 1;
-			selected.rotate(5);
-			selected.hasVertices = true;
-			// selected.hasVertices = true;
-
-		}
 		repaint();
 	}
+	public void mouseMoved(MouseEvent e) {}
+		public void paintComponent (Graphics g)
+		{
+			super.paintComponent (g);
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+			RenderingHints.VALUE_ANTIALIAS_ON);
+			for (int i = 0; i < S.size(); i++)
+			{
+				S.get(i).paintComponent (g2);
+			}
+		}
+		public void actionPerformed (ActionEvent e)
+		{
+			if (e.getSource() == saveButton)
+			{
+				ShapeIO shapeIO = new ShapeIO ();
+				shapeIO.writeShapes ("SavedShapes.io", S);
+			}
+		}
+		public void mousePressed (MouseEvent e)
+		{
+			//System.out.println ("Mouse pressed at " + e.getX() + ", " + e.getY());
+			inFrame = true;
+			currentX = e.getX();
+			currentY = e.getY();
+			selected = null;
+			if (e.getButton() == e.BUTTON1) // Left mouse button
+			{
+				//System.out.println ("BUTTON1 pressed at " + e.getX() + ", " + e.getY());
+				for (int i = S.size()-1; selected == null && i >= 0; i--)
+				{
+					if (S.get(i).isIn(currentX, currentY))
+					{
+						selected = S.get(i);
+						S.get(i).isSelected = true;
+						System.out.println ("Selected " + selected);
+					}
+					else
+					{
+						S.get(i).isSelected = false;
+					}
+					repaint();
+				}
+			}
+
+		}
+		public void mouseReleased (MouseEvent e) {}
+			public void mouseEntered (MouseEvent e)
+			{
+				inFrame = true;
+			}
+			public void mouseExited (MouseEvent e)
+			{
+				inFrame = false;
+				selected = null;
+			}
+			public void mouseClicked (MouseEvent e) {}
 
 
-	/** Handle the key pressed event from the text field. */
-	public void keyTyped(KeyEvent e) {
-		//displayInfo(e, "KEY PRESSED: ");
-	}
+				public void keyPressed(KeyEvent e)
+				{
+					//displayInfo(e, "KEY PRESSED: ");
 
-	/** Handle the key released event from the text field. */
-	public void keyReleased(KeyEvent e) {
-		//displayInfo(e, "KEY RELEASED: ");
-	}
-}
+					if (e.getKeyCode() == KeyEvent.VK_SHIFT)
+					{
+						shift = true;
+					}
+					if (e.getKeyCode() == KeyEvent.VK_ALT)
+					{
+						alt = true;
+					}
+
+					if (ready)
+					{
+						ready = false;
+						if (e.getKeyCode() == 37) // left key
+						{
+							// System.out.println(e.getKeyCode());
+							selected.move(-5,0);
+						}
+						else if (e.getKeyCode() == 38) // up key
+						{
+							// System.out.println(e.getKeyCode());
+							selected.move(0,-5);
+						}
+						else if (e.getKeyCode() == 39) // right key
+						{
+							// System.out.println(e.getKeyCode());
+							selected.move(5,0);
+						}
+						else if (e.getKeyCode() == 40) // down key
+						{
+							// System.out.println(e.getKeyCode());
+							selected.move(0,5);
+						}
+						else if (e.getKeyCode() == 61) // + key
+						{
+							// System.out.println(e.getKeyCode());
+							selected.resize(1);
+						}
+						else if (e.getKeyCode() == 45) // - kwy
+						{
+							// System.out.println(e.getKeyCode());
+							selected.resize(-1);
+						}
+						else if (e.getKeyCode() == 76) // L kwy
+						{
+							// System.out.println(e.getKeyCode());
+							selected.rotateValue -= 1;
+							selected.rotate(-5);
+							selected.hasVertices = true;
+							// selected.hasVertices = true;
+						}
+						else if (e.getKeyCode() == 82) // R kwy
+						{
+							// System.out.println(e.getKeyCode());
+							selected.rotateValue += 1;
+							selected.rotate(5);
+							selected.hasVertices = true;
+							// selected.hasVertices = true;
+
+						}
+						repaint();
+						ready = true;
+					}
+				}
+
+
+				/** Handle the key pressed event from the text field. */
+				public void keyTyped(KeyEvent e) {
+					//displayInfo(e, "KEY PRESSED: ");
+				}
+
+				/** Handle the key released event from the text field. */
+				public void keyReleased(KeyEvent e) {
+					//displayInfo(e, "KEY RELEASED: ");
+					if (e.getKeyCode() == KeyEvent.VK_SHIFT)
+					{
+						shift = false;
+					}
+					if (e.getKeyCode() == KeyEvent.VK_ALT)
+					{
+						alt = false;
+					}
+				}
+			}
