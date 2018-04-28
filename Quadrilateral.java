@@ -32,7 +32,7 @@ public class Quadrilateral extends Shape
         // Translate vertices to origin to perform scale algorithm
         transX = doubleVertexX[i] - centerX;
         transY = doubleVertexY[i] - centerY;
-        System.out.println(doubleVertexX[i]);
+       // System.out.println(doubleVertexX[i]);
         if (N > 0)
         {
         // Algorithm to increase shape size
